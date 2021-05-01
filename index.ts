@@ -1,5 +1,6 @@
 'use strict';
-import line from '@line/bot-sdk'
+import * as line from '@line/bot-sdk'
+import { getVerses } from './utils/bibleUtils';
 import { sendMessage } from './utils/lineUtils';
 export const lineClient = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
@@ -15,8 +16,23 @@ exports.handler = async function (event, context) {
     })
   } else {
     const text = body.events[0].message.text as string
+    const replyToken = body.events[0].replyToken
 
-    await sendMessage(text, body.events[0].replyToken)
+    // Kej 1:1
+
+    const keyword = text.split(' ')[0]
+    const chapter = text.split(' ')[1].split(':')[0]
+    const verse = text.split(' ')[1].split(':')[1]
+
+    const verses = await getVerses({
+      keyword,
+      chapter,
+      verse
+    })
+
+    await sendMessage(verses, replyToken)
+
+
 
     context.succeed({
       statusCode: 200,

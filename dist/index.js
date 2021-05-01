@@ -7,13 +7,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const bot_sdk_1 = __importDefault(require("@line/bot-sdk"));
+const line = __importStar(require("@line/bot-sdk"));
+const bibleUtils_1 = require("./utils/bibleUtils");
 const lineUtils_1 = require("./utils/lineUtils");
-exports.lineClient = new bot_sdk_1.default.Client({
+exports.lineClient = new line.Client({
     channelAccessToken: process.env.ACCESSTOKEN
 });
 exports.handler = function (event, context) {
@@ -28,7 +33,17 @@ exports.handler = function (event, context) {
         }
         else {
             const text = body.events[0].message.text;
-            yield lineUtils_1.sendMessage(text, body.events[0].replyToken);
+            const replyToken = body.events[0].replyToken;
+            // Kej 1:1
+            const keyword = text.split(' ')[0];
+            const chapter = text.split(' ')[1].split(':')[0];
+            const verse = text.split(' ')[1].split(':')[1];
+            const verses = yield bibleUtils_1.getVerses({
+                keyword,
+                chapter,
+                verse
+            });
+            yield lineUtils_1.sendMessage(verses, replyToken);
             context.succeed({
                 statusCode: 200,
                 headers: { "X-Line-Status": "OK" },
