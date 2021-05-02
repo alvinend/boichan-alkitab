@@ -2,6 +2,7 @@
 import * as line from '@line/bot-sdk'
 import { analyseText, getVerses } from './utils/bibleUtils';
 import { sendMessage } from './utils/lineUtils';
+import { sendLog } from './utils/slackUtils';
 export const lineClient = new line.Client({
   channelAccessToken: process.env.ACCESSTOKEN
 })
@@ -16,13 +17,37 @@ exports.handler = async function (event, context) {
     })
   } else {
     const text = body.events[0].message.text as string
-    const replyToken = body.events[0].replyToken
+    try {
+      const replyToken = body.events[0].replyToken
 
-    const analysedData = analyseText(text)
+      const analysedData = analyseText(text)
 
-    const verses = await getVerses(analysedData)
+      const verses = await getVerses(analysedData)
 
-    await sendMessage(verses, replyToken)
+      await sendMessage(verses, replyToken)
+
+      await sendLog(
+        '==============' +
+        'Text' +
+        '==============' +
+        `${text}` +
+        '==============' +
+        'Response' +
+        '==============' +
+        `${verses}`
+      )      
+    } catch(e) {
+      await sendLog(
+        '==============' +
+        'Text' +
+        '==============' +
+        `${text}` +
+        '==============' +
+        'Error' +
+        '==============' +
+        `${e}`
+      )   
+    }
 
     context.succeed({
       statusCode: 200,
