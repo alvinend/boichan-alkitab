@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const hookUrl = 'https://hooks.slack.com/services/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'
+const hookUrl = process.env.SLACK_WEBHOOK
+console.log('')
 
 export const sendLog = async (str: string) => {
   try {

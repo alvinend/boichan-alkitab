@@ -1,4 +1,5 @@
-'use strict';
+require('dotenv').config()
+
 import * as line from '@line/bot-sdk'
 import { analyseText, getVerses } from './utils/bibleUtils';
 import { sendMessage } from './utils/lineUtils';
