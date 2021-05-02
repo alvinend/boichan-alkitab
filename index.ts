@@ -9,6 +9,7 @@ export const lineClient = new line.Client({
 })
 
 exports.handler = async function (event, context) {
+  const startRequestTime = new Date()
   const body = JSON.parse(event.body);
   if (body.events[0].replyToken === '00000000000000000000000000000000') { //接続確認エラー回避
     context.succeed({
@@ -26,27 +27,28 @@ exports.handler = async function (event, context) {
       const verses = await getVerses(analysedData)
 
       await sendMessage(verses, replyToken)
+      const messageSentTime = new Date()
 
       await sendLog(
-        '==============' +
-        'Text' +
-        '==============' +
-        `${text}` +
-        '==============' +
-        'Response' +
-        '==============' +
-        `${verses}`
+        '============== \n' +
+        'Text \n' +
+        '============== \n' +
+        `${text} \n` +
+        '============== \n' +
+        `Response ${messageSentTime.getTime() - startRequestTime.getTime()}ms \n` +
+        '============== \n' +
+        `${verses} \n`
       )      
     } catch(e) {
       await sendLog(
-        '==============' +
-        'Text' +
-        '==============' +
-        `${text}` +
-        '==============' +
-        'Error' +
-        '==============' +
-        `${e}`
+        '============== \n' +
+        'Text \n' +
+        '============== \n' +
+        `${text} \n` +
+        '============== \n' +
+        'Error \n' +
+        '============== \n' +
+        `${e} \n`
       )   
     }
 
