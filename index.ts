@@ -30,25 +30,31 @@ exports.handler = async function (event, context) {
       const messageSentTime = new Date()
 
       await sendLog(
-        '============== \n' +
+        '```\n' +
+        '---------------- \n' +
         'Text \n' +
-        '============== \n' +
+        '---------------- \n' +
         `${text} \n` +
-        '============== \n' +
-        `Response ${messageSentTime.getTime() - startRequestTime.getTime()}ms \n` +
-        '============== \n' +
-        `${verses} \n`
+        '---------------- \n' +
+        `Response (${messageSentTime.getTime() - startRequestTime.getTime()})ms \n` +
+        '---------------- \n' +
+        `${verses} \n` +
+        '---------------- \n' +
+        '```\n'
       )      
     } catch(e) {
       await sendLog(
-        '============== \n' +
+        '```\n' +
+        '---------------- \n' +
         'Text \n' +
-        '============== \n' +
+        '---------------- \n' +
         `${text} \n` +
-        '============== \n' +
+        '---------------- \n' +
         'Error \n' +
-        '============== \n' +
-        `${e} \n`
+        '---------------- \n' +
+        `${e} \n` +
+        '---------------- \n' +
+        '```\n'
       )   
     }
 
