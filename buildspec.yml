@@ -1,0 +1,26 @@
+version: 0.2
+
+run-as: root
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo Install Deps
+      - npm install
+  build:
+    commands:
+      - echo Build Production
+      - npm run compile
+      - echo Copy Package Json
+      - cp ./package.json ./dist/package.json
+      - echo Install Deps in Dist
+      - cd dist && npm install --only=prod && cd ..
+      - echo Make Zip
+      - cd dist && zip -r ../deploy.zip . && cd ..
+  post_build:
+    commands:
+      - echo Deploy To Lambda
+      - npm run deploy
+

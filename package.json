@@ -5,17 +5,19 @@
   "main": "index.js",
   "dependencies": {
     "@line/bot-sdk": "^7.3.0",
+    "aws-sdk": "^2.897.0",
     "axios": "^0.21.1",
     "tslint": "^5.12.1",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@types/node": "10.14.0",
+    "@types/node": "^10.14.0",
     "typescript": "^3.3.3"
   },
   "scripts": {
     "compile": "tsc",
-    "test": "tsc && node ./dist/utils/test.js"
+    "test": "tsc && node ./dist/utils/test.js",
+    "deploy": "tsc && node ./dist/deploy.js"
   },
   "author": "",
   "license": "ISC"

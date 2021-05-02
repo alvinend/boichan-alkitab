@@ -9,9 +9,13 @@
     "tslint": "^5.12.1",
     "xml-js": "^1.6.11"
   },
+  "devDependencies": {
+    "@types/node": "10.14.0",
+    "typescript": "^3.3.3"
+  },
   "scripts": {
     "compile": "tsc",
-    "test": "tsc && node ./dist/utils/alkitabIdnUtils.js"
+    "test": "tsc && node ./dist/utils/test.js"
   },
   "author": "",
   "license": "ISC"

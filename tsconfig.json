@@ -6,9 +6,12 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "lib": [
+      "es5",
+      "es2015.promise"
+    ],
   },
-  "lib": ["es2015"],
   "exclude": [
 		".git",
 		"node_modules"
