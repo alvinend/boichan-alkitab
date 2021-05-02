@@ -32,3 +32,7 @@ const uploadToS3 = async () => {
 }
 
 uploadToS3()
+
+// S3_BUCKET
+// S3_KEY
+// FUNCTION_NAME
