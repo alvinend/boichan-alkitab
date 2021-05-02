@@ -1,13 +1,11 @@
-import { getVerses } from "./bibleUtils"
+import { analyseText, getVerses } from "./bibleUtils"
 
-const test = async () => {
-  const res = await getVerses({
-    keyword: 'Wahyu',
-    chapter: 2,
-    verse: 2
-  })
+const test = async (str) => {
+  const analysedData = analyseText(str)
+
+  const res = await getVerses(analysedData)
 
   console.log(res)
 }
 
-test()
+test('kis 1:1 aasdasdadasdasd')

@@ -34,15 +34,8 @@ exports.handler = function (event, context) {
         else {
             const text = body.events[0].message.text;
             const replyToken = body.events[0].replyToken;
-            // Kej 1:1
-            const keyword = text.split(' ')[0];
-            const chapter = text.split(' ')[1].split(':')[0];
-            const verse = text.split(' ')[1].split(':')[1];
-            const verses = yield bibleUtils_1.getVerses({
-                keyword,
-                chapter,
-                verse
-            });
+            const analysedData = bibleUtils_1.analyseText(text);
+            const verses = yield bibleUtils_1.getVerses(analysedData);
             yield lineUtils_1.sendMessage(verses, replyToken);
             context.succeed({
                 statusCode: 200,

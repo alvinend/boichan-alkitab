@@ -65,7 +65,7 @@ const second_tessalonians = __importStar(require("../db/jp/2thess.json"));
 const first_timothy = __importStar(require("../db/jp/1tim.json"));
 const second_timothy = __importStar(require("../db/jp/2tim.json"));
 const titus = __importStar(require("../db/jp/titus.json"));
-const philemon = __importStar(require("../db/jp/phil.json"));
+const philemon = __importStar(require("../db/jp/phlm.json"));
 const hebrews = __importStar(require("../db/jp/heb.json"));
 const james = __importStar(require("../db/jp/jas.json"));
 const first_peter = __importStar(require("../db/jp/1pet.json"));
@@ -81,6 +81,7 @@ exports.getVerseJpn = ({ keyword, chapter, verse }) => {
     const bookTitle = bibleIndex.keyword;
     const contentText = (object) => {
         try {
+            console.log(`${bibleIndex.dict_key}.${chapter}.${verse}`);
             return Object
                 .values(object)
                 .filter(data => data.key === `${bibleIndex.dict_key}.${chapter}.${verse}`)[0]

@@ -57,7 +57,7 @@ import * as second_tessalonians from '../db/jp/2thess.json'
 import * as first_timothy from '../db/jp/1tim.json'
 import * as second_timothy from '../db/jp/2tim.json'
 import * as titus from '../db/jp/titus.json'
-import * as philemon from '../db/jp/phil.json'
+import * as philemon from '../db/jp/phlm.json'
 import * as hebrews from '../db/jp/heb.json'
 import * as james from '../db/jp/jas.json'
 import * as first_peter from '../db/jp/1pet.json'
@@ -81,6 +81,7 @@ export const getVerseJpn: iGetVerse = ({
 
   const contentText = (object: typeof genesis) => {
     try {
+      console.log(`${bibleIndex.dict_key}.${chapter}.${verse}`)
       return Object
       .values(object)
       .filter(data => data.key === `${bibleIndex.dict_key}.${chapter}.${verse}`)[0]

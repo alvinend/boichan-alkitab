@@ -58,7 +58,7 @@ export const BIBLE_INDEXES = [
   { keyword: '2 Timotius', en: 'second_timothy', jp: '2 テモテへ', dict_key: '2Tim' },
   { keyword: 'Titus', en: 'titus', jp: 'テトスへの手紙', dict_key: 'Titus' },
   { keyword: 'Filemon', en: 'philemon', jp: 'フィレモンへ', dict_key: 'Phlm' },
-  { keyword: 'Ibrani', en: 'hebrews', jp: 'ヘブライ人へ', dict_key: 'heb' },
+  { keyword: 'Ibrani', en: 'hebrews', jp: 'ヘブライ人へ', dict_key: 'Heb' },
   { keyword: 'Yakobus', en: 'james', jp: 'ヤコブ', dict_key: 'Jas' },
   { keyword: '1 Petrus', en: 'first_peter', jp: 'ペテロへの手紙第一', dict_key: '1Pet' },
   { keyword: '2 Petrus', en: 'second_peter', jp: 'ペテロの手紙第二', dict_key: '2Pet' },
@@ -72,14 +72,38 @@ export const BIBLE_INDEXES = [
 export const getBibleIndex = (keyword) => {
   let index = -1
 
-  BIBLE_INDEXES.map(x => x.keyword.toLowerCase()).forEach(
-    (value, i) => {
-      if (value.includes(keyword.toLowerCase())) {
-        index = i
-      }
-    }
-  )
+  // Process Space
+  keyword = keyword.split(' ').join('')
 
+  // Search IDN
+  BIBLE_INDEXES
+    .map(x => x.keyword.split(' ').join('').toLowerCase())
+    .some(
+      (value, i) => {
+        if (value.includes(keyword.toLowerCase())) {
+          index = i
+          return true
+        }
+        return false
+      }
+    )
+
+  // Search Jpn if Idn not found
+  if (index === -1) {
+    BIBLE_INDEXES
+      .map(x => x.jp.split(' ').join(''))
+      .forEach(
+        (value, i) => {
+          if (value.includes(keyword)) {
+            index = i
+            return true
+          }
+          return false
+        }
+      )
+  }
+
+  // Error if not Found
   if (index === -1) {
     throw 'Index Not Found'
   }

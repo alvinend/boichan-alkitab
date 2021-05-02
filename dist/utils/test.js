@@ -9,13 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const bibleUtils_1 = require("./bibleUtils");
-const test = () => __awaiter(this, void 0, void 0, function* () {
-    const res = yield bibleUtils_1.getVerses({
-        keyword: 'Wahyu',
-        chapter: 2,
-        verse: 2
-    });
+const test = (str) => __awaiter(this, void 0, void 0, function* () {
+    const analysedData = bibleUtils_1.analyseText(str);
+    const res = yield bibleUtils_1.getVerses(analysedData);
     console.log(res);
 });
-test();
+test('kis 1:1 aasdasdadasdasd');
 //# sourceMappingURL=test.js.map
