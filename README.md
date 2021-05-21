@@ -2,7 +2,16 @@
 Christian Bible Line bot with AWS API Gateway and AWS Lambda as gateway. 
 Source from [Sabda Labs](https://labs.sabda.org/API) and [FujiHaruka Bible Github Repo](https://github.com/FujiHaruka/bible-api)
 
-![Image of Yaktocat](docs/demo.png)
+![Image of Demo Screenshot](docs/demo.png)
+
+# Usage
+Bot Name: 聖書 IDN - JPN
+QR Code:
+![Image of QR Code](docs/qr-code.png)
+
+1. Add Line bot to your friend (or group)
+2. Chat with format "{BOOK} {PSALM} : {CHAPTER}"
+3. Just wait for response!
 
 # Installation
 ## Create Channel Provider from Line Developers
