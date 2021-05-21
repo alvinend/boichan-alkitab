@@ -6,7 +6,9 @@ Source from [Sabda Labs](https://labs.sabda.org/API) and [FujiHaruka Bible Githu
 
 # Usage
 Bot Name: 聖書 IDN - JPN
+
 QR Code:
+
 ![Image of QR Code](docs/qr-code.png)
 
 1. Add Line bot to your friend (or group)
